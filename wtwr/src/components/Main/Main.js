@@ -20,7 +20,6 @@ function Main({ sys, weather, weatherTemp, onSelectCard }) {
     const sunsetUnix = sys.sunset * 1000;
     // const sunriseTime = new Date(sunriseUnix * 1000).toLocaleString("default");
     // const sunsetTime = new Date(sunsetUnix * 1000).toLocaleString("default");
-
     console.log(sunriseUnix, sunsetUnix, currentTime);
     if (sunsetUnix >= currentTime >= sunriseUnix) {
       return true;
@@ -32,16 +31,19 @@ function Main({ sys, weather, weatherTemp, onSelectCard }) {
   };
 
   const getWeatherCondition = () => {
-    const weatherId = weather.id;
-    if (200 <= weatherId <= 232) {
+    console.log(weather[0].id);
+    const weatherId = weather[0].id;
+    console.log(weatherId);
+
+    if (200 <= weatherId && weatherId <= 232) {
       return "storm";
-    } else if (300 <= weatherId <= 531) {
+    } else if (300 <= weatherId && weatherId <= 531) {
       return "rain";
-    } else if (600 <= weatherId <= 622) {
+    } else if (600 <= weatherId && weatherId <= 622) {
       return "snow";
     } else if (weatherId === 800) {
       return "clear";
-    } else if (801 <= weatherId <= 804) {
+    } else if (801 <= weatherId && weatherId <= 804) {
       return "cloudy";
     }
   };
@@ -49,6 +51,7 @@ function Main({ sys, weather, weatherTemp, onSelectCard }) {
   const weatherType = getWeatherType();
   const isDay = getIsDay();
   const weatherCondition = getWeatherCondition();
+  console.log(weatherCondition);
   const filteredCards = defaultClothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
   });
