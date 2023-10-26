@@ -58,7 +58,6 @@ function Main({ sys, weather, weatherTemp, onSelectCard }) {
 
   return (
     <main className="main">
-      {/* need to pass weathercard api values for accurate picture */}
       <WeatherCard
         isDay={isDay}
         type={weatherCondition}
