@@ -4,7 +4,7 @@ import ItemCard from "../ItemCard/ItemCard";
 import { currentTime } from "../../utils/constants";
 // import { useMemo } from "react";
 
-function Main({ sys, weather, weatherTemp, onSelectCard }) {
+function Main({ sunrise, sunset, weatherId, weatherTemp, onSelectCard }) {
   const getWeatherType = () => {
     if (weatherTemp >= 86) {
       return "hot";
@@ -16,10 +16,8 @@ function Main({ sys, weather, weatherTemp, onSelectCard }) {
   };
 
   const getIsDay = () => {
-    const sunriseUnix = sys.sunrise * 1000;
-    const sunsetUnix = sys.sunset * 1000;
-    // const sunriseTime = new Date(sunriseUnix * 1000).toLocaleString("default");
-    // const sunsetTime = new Date(sunsetUnix * 1000).toLocaleString("default");
+    const sunriseUnix = sunrise * 1000;
+    const sunsetUnix = sunset * 1000;
     console.log(sunriseUnix, sunsetUnix, currentTime);
     if (sunsetUnix >= currentTime >= sunriseUnix) {
       return true;
@@ -31,8 +29,6 @@ function Main({ sys, weather, weatherTemp, onSelectCard }) {
   };
 
   const getWeatherCondition = () => {
-    console.log(weather[0].id);
-    const weatherId = weather[0].id;
     console.log(weatherId);
 
     if (200 <= weatherId && weatherId <= 232) {

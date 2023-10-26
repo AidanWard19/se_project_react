@@ -14,8 +14,9 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [location, setLocation] = React.useState("");
   const [temp, setTemp] = React.useState(0);
-  const [weather, setWeather] = React.useState({});
-  const [sys, setSys] = React.useState({});
+  const [sunrise, setSunrise] = React.useState(0);
+  const [sunset, setSunset] = React.useState(0);
+  const [weatherId, setWeatherId] = React.useState(0);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -38,11 +39,11 @@ function App() {
         const main = data.main;
         const temperature = main.temp;
         const sys = data.sys;
-        console.log(sys);
-        setSys(sys);
-        setWeather(data.weather);
+        setSunrise(sys.sunrise);
+        setSunset(sys.sunset);
         setTemp(temperature);
         setLocation(location);
+        setWeatherId(data.weather[0].id);
       })
       .catch((err) => {
         console.error(err);
@@ -53,8 +54,9 @@ function App() {
     <div>
       <Header place={location} onCreateModal={handleCreateModal} />
       <Main
-        sys={sys}
-        weather={weather}
+        sunrise={sunrise}
+        sunset={sunset}
+        weatherId={weatherId}
         weatherTemp={temp}
         onSelectCard={handleSelectedCard}
       />
