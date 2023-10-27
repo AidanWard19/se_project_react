@@ -7,7 +7,7 @@ import React from "react";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-import { getApiWeatherData } from "../../utils/utils";
+import { getApiWeatherData } from "../../utils/weatherApi";
 
 function App() {
   const [activeModal, setActiveModal] = React.useState("");
@@ -26,24 +26,43 @@ function App() {
     setActiveModal("");
   };
 
+  React.useEffect(() => {
+    if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
+    const handleEscClose = (e) => {
+      // define the function inside useEffect not to lose the reference on rerendering
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      // don't forget to add a clean up function for removing the listener
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
   React.useEffect(() => {
-    getApiWeatherData().then((data) => {
-      console.log(data);
-      const location = data.name;
-      const main = data.main;
-      const temperature = main.temp;
-      const sys = data.sys;
-      setSunrise(sys.sunrise);
-      setSunset(sys.sunset);
-      setTemp(temperature);
-      setLocation(location);
-      setWeatherId(data.weather[0].id);
-    });
+    getApiWeatherData()
+      .then((data) => {
+        console.log(data);
+        const location = data.name;
+        const main = data.main;
+        const temperature = main.temp;
+        const sys = data.sys;
+        setSunrise(sys.sunrise);
+        setSunset(sys.sunset);
+        setTemp(temperature);
+        setLocation(location);
+        setWeatherId(data.weather[0].id);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
@@ -88,21 +107,39 @@ function App() {
           <label className="modal__label">Select the weather type:</label>
           <div className="modal__temp-options-list">
             <div>
-              <input type="radio" id="hot" value="hot" name="weather type" />
-              <label className="modal__radio-label" id="hot">
-                Hot
+              <label className="modal__radio-option" id="hot">
+                <input
+                  className="modal__radio-button"
+                  type="radio"
+                  id="hot"
+                  value="hot"
+                  name="weather-type"
+                />
+                <p className="modal__radio-label">Hot</p>
               </label>
             </div>
             <div>
-              <input type="radio" id="warm" value="warm" name="weather type" />
-              <label className="modal__radio-label" id="warm">
-                Warm
+              <label className="modal__radio-option" id="warm">
+                <input
+                  className="modal__radio-button"
+                  type="radio"
+                  id="warm"
+                  value="warm"
+                  name="weather-type"
+                />
+                <p className="modal__radio-label">Warm</p>
               </label>
             </div>
             <div>
-              <input type="radio" id="cold" value="cold" name="weather type" />
-              <label className="modal__radio-label" id="cold">
-                Cold
+              <label className="modal__radio-option" id="cold">
+                <input
+                  className="modal__radio-button"
+                  type="radio"
+                  id="cold"
+                  value="cold"
+                  name="weather-type"
+                />
+                <p className="modal__radio-label">Cold</p>
               </label>
             </div>
           </div>

@@ -2,18 +2,8 @@ import "./ItemModal.css";
 import React from "react";
 
 const ItemModal = ({ selectedCard, onClose }) => {
-  React.useEffect(() => {
-    const close = (e) => {
-      if (e.keyCode === 27) {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
-  }, [onClose]);
-
   return (
-    <div className={"item-modal"}>
+    <div className={"modal item-modal"}>
       <div className="item-modal__content">
         <button
           className="item-modal__close"
