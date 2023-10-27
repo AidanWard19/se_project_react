@@ -14,9 +14,9 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [location, setLocation] = React.useState("");
   const [temp, setTemp] = React.useState(0);
-  const [sunrise, setSunrise] = React.useState(0);
-  const [sunset, setSunset] = React.useState(0);
-  const [weatherId, setWeatherId] = React.useState(0);
+  const [sunrise, setSunrise] = React.useState(1698361876141);
+  const [sunset, setSunset] = React.useState(1698361876141);
+  const [weatherId, setWeatherId] = React.useState(400);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -32,22 +32,18 @@ function App() {
   };
 
   React.useEffect(() => {
-    getApiWeatherData()
-      .then((data) => {
-        console.log(data);
-        const location = data.name;
-        const main = data.main;
-        const temperature = main.temp;
-        const sys = data.sys;
-        setSunrise(sys.sunrise);
-        setSunset(sys.sunset);
-        setTemp(temperature);
-        setLocation(location);
-        setWeatherId(data.weather[0].id);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    getApiWeatherData().then((data) => {
+      console.log(data);
+      const location = data.name;
+      const main = data.main;
+      const temperature = main.temp;
+      const sys = data.sys;
+      setSunrise(sys.sunrise);
+      setSunset(sys.sunset);
+      setTemp(temperature);
+      setLocation(location);
+      setWeatherId(data.weather[0].id);
+    });
   }, []);
 
   return (

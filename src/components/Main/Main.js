@@ -19,12 +19,12 @@ function Main({ sunrise, sunset, weatherId, weatherTemp, onSelectCard }) {
     const sunriseUnix = sunrise * 1000;
     const sunsetUnix = sunset * 1000;
     console.log(sunriseUnix, sunsetUnix, currentTime);
-    if (sunsetUnix >= currentTime >= sunriseUnix) {
+    if (sunsetUnix >= currentTime && currentTime >= sunriseUnix) {
       return true;
     } else if (sunsetUnix <= currentTime) {
       return false;
     } else {
-      console.log("error with isDay logic");
+      return true;
     }
   };
 

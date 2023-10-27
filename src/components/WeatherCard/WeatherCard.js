@@ -5,15 +5,11 @@ const WeatherCard = ({ isDay, type, weatherTemp }) => {
   console.log(isDay);
   console.log(type);
 
-  let currentWeatherUrl;
-
   const currentWeather = weatherList.find((condition) => {
-    if (condition.isDay === isDay && condition.type === type) {
-      currentWeatherUrl = condition.url;
-      return true;
-    }
+    return condition.isDay === isDay && condition.type === type;
   });
-  console.log(currentWeather);
+
+  const currentWeatherUrl = currentWeather.url;
 
   return (
     <section className="weather" id="weather">
