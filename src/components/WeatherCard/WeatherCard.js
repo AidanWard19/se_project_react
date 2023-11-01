@@ -9,7 +9,7 @@ const WeatherCard = ({ isDay, type, weatherTemp }) => {
     return condition.isDay === isDay && condition.type === type;
   });
 
-  const currentWeatherUrl = currentWeather.url;
+  const currentWeatherUrl = currentWeather?.url;
 
   return (
     <section className="weather" id="weather">
