@@ -12,14 +12,14 @@ const WeatherCard = ({ isDay, type, weatherTemp }) => {
   const currentWeatherUrl = currentWeather?.url;
 
   return (
-    <section className="weather" id="weather">
+    <div className="weather" id="weather">
+      <div className="weather__temp">{weatherTemp} °F</div>
       <img
         className="weather__image"
         src={currentWeatherUrl}
         alt="weather display"
       />
-      <div className="weather__temp">{weatherTemp} °F</div>
-    </section>
+    </div>
   );
 };
 
