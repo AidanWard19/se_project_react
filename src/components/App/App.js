@@ -5,7 +5,7 @@ import React from "react";
 // import Weather from "../Weather/Weather";
 // import ItemCard from "../ItemCard/ItemCard";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getApiWeatherData, parseWeatherData } from "../../utils/weatherApi";
@@ -34,17 +34,14 @@ function App() {
   };
 
   React.useEffect(() => {
-    if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
+    if (!activeModal) return;
     const modal = document.querySelector(".modal");
-
     const handleEscClose = (e) => {
-      // define the function inside useEffect not to lose the reference on rerendering
       if (e.key === "Escape") {
         handleCloseModal();
       }
     };
     const handleClickAwayClose = (event) => {
-      console.log(event.target, event.currentTarget);
       if (event.target === event.currentTarget) {
         handleCloseModal();
       }
@@ -69,6 +66,10 @@ function App() {
 
   const openConfirmModal = () => {
     setActiveModal("confirm");
+  };
+
+  const onAddItem = (values) => {
+    console.log(values);
   };
 
   React.useEffect(() => {
@@ -99,7 +100,7 @@ function App() {
       >
         <Header place={location} onCreateModal={handleCreateModal} />
         <Switch>
-          <Route exact path="/se_project_react">
+          <Route exact path="/">
             <Main
               sunrise={sunrise}
               sunset={sunset}
@@ -108,78 +109,16 @@ function App() {
               onSelectCard={handleSelectedCard}
             />
           </Route>
-          <Route path="/se_project_react/profile">Profile</Route>
+          <Route path="/profile">Profile</Route>
         </Switch>
 
         <Footer />
         {activeModal === "create" && (
-          <ModalWithForm
-            buttonText="Add garment"
-            title="New garment"
-            onClose={handleCloseModal}
-          >
-            <label className="modal__label">
-              Name
-              <input
-                className="modal__input"
-                type="text"
-                name="name"
-                minLength="1"
-                maxLength="30"
-                placeholder="Name"
-              />
-            </label>
-            <label className="modal__label">
-              Image
-              <input
-                className="modal__input"
-                type="url"
-                name="link"
-                minLength="1"
-                maxLength="300"
-                placeholder="Image URL"
-              />
-            </label>
-            <label className="modal__label">Select the weather type:</label>
-            <div className="modal__temp-options-list">
-              <div>
-                <label className="modal__radio-option" id="hot">
-                  <input
-                    className="modal__radio-button"
-                    type="radio"
-                    id="hot"
-                    value="hot"
-                    name="weather-type"
-                  />
-                  <p className="modal__radio-label">Hot</p>
-                </label>
-              </div>
-              <div>
-                <label className="modal__radio-option" id="warm">
-                  <input
-                    className="modal__radio-button"
-                    type="radio"
-                    id="warm"
-                    value="warm"
-                    name="weather-type"
-                  />
-                  <p className="modal__radio-label">Warm</p>
-                </label>
-              </div>
-              <div>
-                <label className="modal__radio-option" id="cold">
-                  <input
-                    className="modal__radio-button"
-                    type="radio"
-                    id="cold"
-                    value="cold"
-                    name="weather-type"
-                  />
-                  <p className="modal__radio-label">Cold</p>
-                </label>
-              </div>
-            </div>
-          </ModalWithForm>
+          <AddItemModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "create"}
+            onAddItem={onAddItem}
+          />
         )}
         {activeModal === "confirm" && <ModalWithConfirm />}
         {activeModal === "preview" && (
