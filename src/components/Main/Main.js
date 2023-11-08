@@ -31,7 +31,7 @@ function Main({ sunrise, sunset, weatherId, weatherTempsObj, onSelectCard }) {
     } else if (sunsetUnix <= currentTime && currentTime <= sunriseUnix) {
       return false;
     } else {
-      return true;
+      return false;
     }
   };
 

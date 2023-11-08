@@ -9,6 +9,8 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getApiWeatherData, parseWeatherData } from "../../utils/weatherApi";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
+// import { act } from "react-dom/test-utils";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   const [activeModal, setActiveModal] = React.useState("");
@@ -32,16 +34,25 @@ function App() {
 
   React.useEffect(() => {
     if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
+    const modal = document.querySelector(".modal");
+
     const handleEscClose = (e) => {
       // define the function inside useEffect not to lose the reference on rerendering
       if (e.key === "Escape") {
         handleCloseModal();
       }
     };
+    const handleClickAwayClose = (event) => {
+      if (event.target === event.currentTarget) {
+        handleCloseModal();
+      }
+    };
     document.addEventListener("keydown", handleEscClose);
+    modal.addEventListener("click", handleClickAwayClose);
     return () => {
       // don't forget to add a clean up function for removing the listener
       document.removeEventListener("keydown", handleEscClose);
+      modal.removeEventListener("click", handleClickAwayClose);
     };
   }, [activeModal]);
 
@@ -82,13 +93,19 @@ function App() {
         value={{ currentTemperatureUnit, handleUnitToggle }}
       >
         <Header place={location} onCreateModal={handleCreateModal} />
-        <Main
-          sunrise={sunrise}
-          sunset={sunset}
-          weatherId={weatherId}
-          weatherTempsObj={tempsObject}
-          onSelectCard={handleSelectedCard}
-        />
+        <Switch>
+          <Route exact path="/se_project_react">
+            <Main
+              sunrise={sunrise}
+              sunset={sunset}
+              weatherId={weatherId}
+              weatherTempsObj={tempsObject}
+              onSelectCard={handleSelectedCard}
+            />
+          </Route>
+          <Route path="/se_project_react/profile">Profile</Route>
+        </Switch>
+
         <Footer />
         {activeModal === "create" && (
           <ModalWithForm
