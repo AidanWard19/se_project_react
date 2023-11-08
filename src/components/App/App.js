@@ -6,6 +6,7 @@ import React from "react";
 // import ItemCard from "../ItemCard/ItemCard";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getApiWeatherData, parseWeatherData } from "../../utils/weatherApi";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
@@ -43,6 +44,7 @@ function App() {
       }
     };
     const handleClickAwayClose = (event) => {
+      console.log(event.target, event.currentTarget);
       if (event.target === event.currentTarget) {
         handleCloseModal();
       }
@@ -50,7 +52,6 @@ function App() {
     document.addEventListener("keydown", handleEscClose);
     modal.addEventListener("click", handleClickAwayClose);
     return () => {
-      // don't forget to add a clean up function for removing the listener
       document.removeEventListener("keydown", handleEscClose);
       modal.removeEventListener("click", handleClickAwayClose);
     };
@@ -64,6 +65,10 @@ function App() {
   const handleUnitToggle = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+  };
+
+  const openConfirmModal = () => {
+    setActiveModal("confirm");
   };
 
   React.useEffect(() => {
@@ -176,8 +181,14 @@ function App() {
             </div>
           </ModalWithForm>
         )}
+        {activeModal === "confirm" && <ModalWithConfirm />}
         {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+          <ItemModal
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            openModal={openConfirmModal}
+            // ^^^ Couldn't I also just go back and turn my activeModal into a context and just have item modal set active modal to delete?
+          />
         )}
       </CurrentTempUnitContext.Provider>
     </div>

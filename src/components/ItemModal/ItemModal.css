@@ -37,7 +37,9 @@
   border-radius: 20px 20px 0 0;
 }
 
-.item-modal__info {
+.item-modal__footer {
+  position: relative;
+  top: -4px;
   background-color: white;
   font-size: 20px;
   line-height: 24px;
@@ -45,9 +47,28 @@
   padding: 20px;
   box-sizing: border-box;
   border-radius: 0 0 20px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-modal__info {
   font-family: "Cabinet Grotesk", sans-serif;
 }
 
 .item-modal__item-name {
   padding-bottom: 12px;
+}
+
+.item-modal__delete-button {
+  appearance: none;
+  outline: none;
+  border: 0px;
+  background-color: transparent;
+  color: red;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  align-self: start;
+  cursor: pointer;
 }
