@@ -2,15 +2,22 @@ import { defaultClothingItems } from "../../utils/constants";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { currentTime } from "../../utils/constants";
-// import { useMemo } from "react";
+import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
+import React from "react";
 
-function Main({ sunrise, sunset, weatherId, weatherTemp, onSelectCard }) {
+function Main({ sunrise, sunset, weatherId, weatherTempsObj, onSelectCard }) {
+  const { currentTemperatureUnit, handleUnitToggle } = React.useContext(
+    CurrentTempUnitContext
+  );
+  console.log(weatherTempsObj?.[currentTemperatureUnit]);
+  const weatherTemp = weatherTempsObj?.[currentTemperatureUnit] || 0;
+
   const getWeatherType = () => {
-    if (weatherTemp >= 86) {
+    if (weatherTempsObj?.["F"] >= 86) {
       return "hot";
-    } else if (weatherTemp >= 66 && weatherTemp <= 85) {
+    } else if (weatherTempsObj?.["F"] >= 66 && weatherTempsObj?.["F"] <= 85) {
       return "warm";
-    } else if (weatherTemp <= 65) {
+    } else if (weatherTempsObj?.["F"] <= 65) {
       return "cold";
     }
   };
@@ -18,13 +25,13 @@ function Main({ sunrise, sunset, weatherId, weatherTemp, onSelectCard }) {
   const getIsDay = () => {
     const sunriseUnix = sunrise * 1000;
     const sunsetUnix = sunset * 1000;
-    console.log(sunriseUnix, sunsetUnix, currentTime);
+    // console.log(sunriseUnix, sunsetUnix, currentTime);
     if (sunsetUnix >= currentTime && currentTime >= sunriseUnix) {
       return true;
-    } else if (sunsetUnix <= currentTime) {
+    } else if (sunsetUnix <= currentTime && currentTime <= sunriseUnix) {
       return false;
     } else {
-      return false;
+      return true;
     }
   };
 
@@ -61,7 +68,8 @@ function Main({ sunrise, sunset, weatherId, weatherTemp, onSelectCard }) {
       />
       <section className="card__section" id="card-section">
         <div className="card__section-title">
-          Today is {weatherTemp}°F / You may want to wear:
+          Today is {weatherTemp}°{currentTemperatureUnit} / You may want to
+          wear:
         </div>
 
         <div className="card__items">

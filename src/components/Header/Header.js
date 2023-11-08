@@ -2,6 +2,7 @@ import "./Header.css";
 import { currentDate } from "../../utils/constants";
 import logo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 const Header = ({ place, onCreateModal }) => {
   return (
@@ -17,15 +18,10 @@ const Header = ({ place, onCreateModal }) => {
       </div>
 
       <div className="header__avatar-logo">
-        <div>
-          <button
-            className="header__button"
-            type="text"
-            onClick={onCreateModal}
-          >
-            + Add Clothes
-          </button>
-        </div>
+        <ToggleSwitch />
+        <button className="header__button" type="text" onClick={onCreateModal}>
+          + Add Clothes
+        </button>
         <div className="header__name">Terrence Tegegne</div>
         <div className="header__avatar">
           <img src={avatar} alt="avatar" />
