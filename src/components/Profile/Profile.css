@@ -43,7 +43,19 @@
   gap: 20px;
 }
 
-.profile__your-items {
+.profile__add-new {
+  appearance: none;
+  outline: none;
+  border: 0px;
+  background-color: transparent;
+  color: rgba(126, 126, 126, 1);
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  align-self: center;
+  cursor: pointer;
+  margin: 0;
 }
 
 .profile__clothes-gallery {

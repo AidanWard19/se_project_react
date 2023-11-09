@@ -39,6 +39,7 @@ const api = {
   getItemList,
   addItem,
   removeItem,
+  handleServerResponse,
 };
 
 export default api;

@@ -1,11 +1,6 @@
 import "./ModalWithConfirm.css";
 
-const ModalWithConfirm = ({ onClose, onSubmit }) => {
-  const handleSubmit = () => {
-    onSubmit();
-    onClose();
-  };
-
+const ModalWithConfirm = ({ onClose, onSubmit, isLoading }) => {
   return (
     <div className="modal confirm-modal">
       <div className="confirm-modal__content">
@@ -21,11 +16,11 @@ const ModalWithConfirm = ({ onClose, onSubmit }) => {
           </p>
 
           <button
-            onClick={handleSubmit}
+            onClick={onSubmit}
             type="button"
             className="modal__delete-button"
           >
-            Yes, delete item
+            {isLoading ? "Deleting..." : "Yes, delete item"}
           </button>
 
           <button

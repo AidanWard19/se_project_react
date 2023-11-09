@@ -2,7 +2,7 @@ import "./Profile.css";
 import ItemCard from "../ItemCard/ItemCard";
 import avatar from "../../images/avatar.svg";
 
-const Profile = ({ clothingItems, handleSelectedCard }) => {
+const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
   return (
     <div className="profile">
       <div className="profile__header">
@@ -12,7 +12,9 @@ const Profile = ({ clothingItems, handleSelectedCard }) => {
       <div className="profile__clothes-section">
         <div className="profile__clothes-header">
           <div className="profile__your-items">Your Items</div>
-          <div className="profile__add-new">+ Add new</div>
+          <button onClick={handleAddNew} className="profile__add-new">
+            + Add new
+          </button>
         </div>
 
         <div className="profile__clothes-gallery">

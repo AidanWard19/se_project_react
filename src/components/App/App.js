@@ -26,6 +26,7 @@ function App() {
     React.useState("F");
   const [clothingItems, setClothingItems] =
     React.useState(defaultClothingItems);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -37,22 +38,24 @@ function App() {
 
   React.useEffect(() => {
     if (!activeModal) return;
-    const modal = document.querySelector(".modal");
     const handleEscClose = (e) => {
+      console.log(e);
       if (e.key === "Escape") {
         handleCloseModal();
       }
     };
     const handleClickAwayClose = (event) => {
-      if (event.target === event.currentTarget) {
+      console.log(event);
+      console.log(activeModal);
+      if (event.target.classList[0] === "modal") {
         handleCloseModal();
       }
     };
     document.addEventListener("keydown", handleEscClose);
-    modal.addEventListener("click", handleClickAwayClose);
+    document.addEventListener("click", handleClickAwayClose);
     return () => {
       document.removeEventListener("keydown", handleEscClose);
-      modal.removeEventListener("click", handleClickAwayClose);
+      document.removeEventListener("click", handleClickAwayClose);
     };
   }, [activeModal]);
 
@@ -71,26 +74,36 @@ function App() {
   };
 
   const onAddItem = (item) => {
-    console.log(item);
+    setIsLoading(true);
     api
       .addItem(item)
       .then((newItem) => {
         console.log(newItem);
         setClothingItems([newItem, ...clothingItems]);
+      })
+      .then(() => {
         handleCloseModal();
+      })
+      .then(() => {
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
 
   const handleDeleteItem = () => {
-    console.log(selectedCard, selectedCard._id);
+    setIsLoading(true);
     api
       .removeItem(selectedCard._id)
       .then(() => {
-        return api.getItemList();
+        setClothingItems((clothingItems) =>
+          clothingItems.filter((c) => selectedCard._id !== c._id)
+        );
       })
-      .then((newList) => {
-        setClothingItems(newList);
+      .then(() => {
+        handleCloseModal();
+      })
+      .then(() => {
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -146,6 +159,7 @@ function App() {
             <Profile
               clothingItems={clothingItems}
               handleSelectedCard={handleSelectedCard}
+              handleAddNew={handleCreateModal}
             />
           </Route>
         </Switch>
@@ -156,12 +170,14 @@ function App() {
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "create"}
             onAddItem={onAddItem}
+            isLoading={isLoading}
           />
         )}
         {activeModal === "confirm" && (
           <ModalWithConfirm
             onClose={handleCloseModal}
             onSubmit={handleDeleteItem}
+            isLoading={isLoading}
           />
         )}
         {activeModal === "preview" && (
