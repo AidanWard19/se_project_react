@@ -11,6 +11,7 @@ import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
 import { Switch, Route } from "react-router-dom";
 import api from "../../utils/api";
 import Profile from "../Profile/Profile";
+import { defaultClothingItems } from "../../utils/constants";
 
 function App() {
   const [activeModal, setActiveModal] = React.useState("");
@@ -23,7 +24,8 @@ function App() {
   const [weatherId, setWeatherId] = React.useState(400);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] =
     React.useState("F");
-  const [clothingItems, setClothingItems] = React.useState([]);
+  const [clothingItems, setClothingItems] =
+    React.useState(defaultClothingItems);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -85,13 +87,22 @@ function App() {
     api
       .removeItem(selectedCard._id)
       .then(() => {
-        api.getItemList();
+        return api.getItemList();
       })
       .then((newList) => {
         setClothingItems(newList);
       })
       .catch((err) => console.log(err));
   };
+
+  React.useEffect(() => {
+    api
+      .getItemList()
+      .then((items) => {
+        setClothingItems(items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   React.useEffect(() => {
     getApiWeatherData()
@@ -112,15 +123,6 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
-
-  React.useEffect(() => {
-    api
-      .getItemList()
-      .then((items) => {
-        setClothingItems(items);
-      })
-      .catch((err) => console.log(err));
   }, []);
 
   return (
