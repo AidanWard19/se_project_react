@@ -12,7 +12,7 @@ const ItemModal = ({ selectedCard, onClose, openModal }) => {
         ></button>
         <img
           className="item-modal__image"
-          src={selectedCard.link}
+          src={selectedCard.imageUrl}
           alt={selectedCard.name}
         />
         <div className="item-modal__footer">

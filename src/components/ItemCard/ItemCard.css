@@ -3,19 +3,6 @@
   justify-content: center;
 }
 
-.card__section {
-  margin-top: 20px;
-}
-
-.card__section-title {
-  margin: 0;
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 25px;
-}
-
 .card__name {
   position: absolute;
   text-align: center;
@@ -41,12 +28,4 @@
   height: 328px;
   border-radius: 10px;
   cursor: pointer;
-}
-
-.card__items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
 }

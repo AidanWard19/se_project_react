@@ -11,6 +11,8 @@
 }
 
 .item-modal__content {
+  /* max-width: 498px;
+  max-height: 610px; */
   position: relative;
   border-radius: 20px;
   max-height: 598px;

@@ -17,11 +17,15 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   };
 
   const handleWeatherTypeChange = (event) => {
-    console.log(event.target.value);
-    if (event.target.value === "hot") setWeatherType("hot");
-    else if (event.target.value === "hot") setWeatherType("warm");
-    else if (event.target.value === "hot") setWeatherType("cold");
-    else setWeatherType("warm");
+    console.log(`pressed ${event.target.value}`);
+    if (event.target.value === "hot") {
+      setWeatherType("hot");
+    } else if (event.target.value === "warm") {
+      setWeatherType("warm");
+    } else if (event.target.value === "cold") {
+      setWeatherType("cold");
+    }
+    console.log(`now set to ${weatherType}`);
   };
 
   const handleSubmit = (event) => {

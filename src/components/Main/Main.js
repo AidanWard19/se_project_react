@@ -1,15 +1,22 @@
-import { defaultClothingItems } from "../../utils/constants";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { currentTime } from "../../utils/constants";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
 import React from "react";
+import "./Main.css";
 
-function Main({ sunrise, sunset, weatherId, weatherTempsObj, onSelectCard }) {
+function Main({
+  sunrise,
+  sunset,
+  weatherId,
+  weatherTempsObj,
+  onSelectCard,
+  clothingItems,
+}) {
   const { currentTemperatureUnit, handleUnitToggle } = React.useContext(
     CurrentTempUnitContext
   );
-  console.log(weatherTempsObj?.[currentTemperatureUnit]);
+  console.log(clothingItems);
   const weatherTemp = weatherTempsObj?.[currentTemperatureUnit] || 0;
 
   const getWeatherType = () => {
@@ -55,8 +62,9 @@ function Main({ sunrise, sunset, weatherId, weatherTempsObj, onSelectCard }) {
   const isDay = getIsDay();
   const weatherCondition = getWeatherCondition();
   console.log(weatherCondition);
-  const filteredCards = defaultClothingItems.filter((item) => {
-    return item.weather.toLowerCase() === weatherType;
+  const filteredCards = clothingItems.filter((item) => {
+    console.log(item.weather);
+    return item.weather === weatherType;
   });
 
   return (
@@ -66,13 +74,13 @@ function Main({ sunrise, sunset, weatherId, weatherTempsObj, onSelectCard }) {
         type={weatherCondition}
         weatherTemp={weatherTemp}
       />
-      <section className="card__section" id="card-section">
-        <div className="card__section-title">
+      <section className="main__section" id="main-section">
+        <div className="main__section-title">
           Today is {weatherTemp}°{currentTemperatureUnit} / You may want to
           wear:
         </div>
 
-        <div className="card__items">
+        <div className="main__items">
           {filteredCards.map((item) => (
             <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
           ))}

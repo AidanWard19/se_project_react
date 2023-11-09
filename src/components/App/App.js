@@ -2,8 +2,6 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import React from "react";
-// import Weather from "../Weather/Weather";
-// import ItemCard from "../ItemCard/ItemCard";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
@@ -12,6 +10,8 @@ import { getApiWeatherData, parseWeatherData } from "../../utils/weatherApi";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
 // import { act } from "react-dom/test-utils";
 import { Switch, Route } from "react-router-dom";
+import api from "../../utils/api";
+import { defaultClothingItems } from "../../utils/constants";
 
 function App() {
   const [activeModal, setActiveModal] = React.useState("");
@@ -24,6 +24,7 @@ function App() {
   const [weatherId, setWeatherId] = React.useState(400);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] =
     React.useState("F");
+  const [clothingItems, setClothingItems] = React.useState([]);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -68,8 +69,23 @@ function App() {
     setActiveModal("confirm");
   };
 
-  const onAddItem = (values) => {
-    console.log(values);
+  const onAddItem = (item) => {
+    api
+      .addItem(item)
+      .then((newItem) => {
+        setClothingItems([newItem, ...clothingItems]);
+        handleCloseModal();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDeleteItem = (card) => {
+    api
+      .removeItem(card.id)
+      .then(() => {
+        setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
+      })
+      .catch((err) => console.log(err));
   };
 
   React.useEffect(() => {
@@ -93,6 +109,15 @@ function App() {
       });
   }, []);
 
+  React.useEffect(() => {
+    api
+      .getItemList()
+      .then((items) => {
+        setClothingItems(items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="page">
       <CurrentTempUnitContext.Provider
@@ -107,6 +132,7 @@ function App() {
               weatherId={weatherId}
               weatherTempsObj={tempsObject}
               onSelectCard={handleSelectedCard}
+              clothingItems={clothingItems}
             />
           </Route>
           <Route path="/profile">Profile</Route>
@@ -120,7 +146,12 @@ function App() {
             onAddItem={onAddItem}
           />
         )}
-        {activeModal === "confirm" && <ModalWithConfirm />}
+        {activeModal === "confirm" && (
+          <ModalWithConfirm
+            onClose={handleCloseModal}
+            onSubmit={handleDeleteItem}
+          />
+        )}
         {activeModal === "preview" && (
           <ItemModal
             selectedCard={selectedCard}
