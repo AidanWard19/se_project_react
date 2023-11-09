@@ -1,7 +1,7 @@
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { currentTime } from "../../utils/constants";
-import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import React from "react";
 import "./Main.css";
 
@@ -14,7 +14,7 @@ function Main({
   clothingItems,
 }) {
   const { currentTemperatureUnit, handleUnitToggle } = React.useContext(
-    CurrentTempUnitContext
+    CurrentTemperatureUnitContext
   );
   console.log(handleUnitToggle);
   const weatherTemp = weatherTempsObj?.[currentTemperatureUnit] || 0;

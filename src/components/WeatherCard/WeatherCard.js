@@ -1,13 +1,13 @@
 import "./WeatherCard.css";
 import { weatherList } from "../../utils/constants";
-import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import React from "react";
 
 const WeatherCard = ({ isDay, type, weatherTemp }) => {
   // console.log(isDay);
   // console.log(type);
   const { currentTemperatureUnit, handleUnitToggle } = React.useContext(
-    CurrentTempUnitContext
+    CurrentTemperatureUnitContext
   );
 
   const currentWeather = weatherList.find((condition) => {

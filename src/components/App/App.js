@@ -7,7 +7,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getApiWeatherData, parseWeatherData } from "../../utils/weatherApi";
-import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom";
 import api from "../../utils/api";
 import Profile from "../Profile/Profile";
@@ -127,7 +127,7 @@ function App() {
 
   return (
     <div className="page">
-      <CurrentTempUnitContext.Provider
+      <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleUnitToggle }}
       >
         <Header place={location} onCreateModal={handleCreateModal} />
@@ -172,7 +172,7 @@ function App() {
             // ^^^ Couldn't I also just go back and turn my activeModal into a context and just have item modal set active modal to delete?
           />
         )}
-      </CurrentTempUnitContext.Provider>
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }
