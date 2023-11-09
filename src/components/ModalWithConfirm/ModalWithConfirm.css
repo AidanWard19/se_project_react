@@ -56,7 +56,7 @@
   background-size: 16px;
   border: none;
 }
-.modal__close:hover {
+.modal__close-button:hover {
   cursor: pointer;
 }
 

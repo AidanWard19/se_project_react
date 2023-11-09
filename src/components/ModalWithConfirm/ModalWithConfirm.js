@@ -1,6 +1,11 @@
 import "./ModalWithConfirm.css";
 
-const ModalWithConfirm = ({ onClose }) => {
+const ModalWithConfirm = ({ onClose, onSubmit }) => {
+  const handleSubmit = () => {
+    onSubmit();
+    onClose();
+  };
+
   return (
     <div className="modal confirm-modal">
       <div className="confirm-modal__content">
@@ -15,11 +20,19 @@ const ModalWithConfirm = ({ onClose }) => {
             irreversible.
           </p>
 
-          <button type="button" className="modal__delete-button">
+          <button
+            onClick={handleSubmit}
+            type="button"
+            className="modal__delete-button"
+          >
             Yes, delete item
           </button>
 
-          <button type="button" className="modal__cancel-button">
+          <button
+            onClick={onClose}
+            type="button"
+            className="modal__cancel-button"
+          >
             Cancel
           </button>
         </div>

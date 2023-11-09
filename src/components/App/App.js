@@ -8,10 +8,9 @@ import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getApiWeatherData, parseWeatherData } from "../../utils/weatherApi";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnitContext";
-// import { act } from "react-dom/test-utils";
 import { Switch, Route } from "react-router-dom";
 import api from "../../utils/api";
-import { defaultClothingItems } from "../../utils/constants";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [activeModal, setActiveModal] = React.useState("");
@@ -70,20 +69,26 @@ function App() {
   };
 
   const onAddItem = (item) => {
+    console.log(item);
     api
       .addItem(item)
       .then((newItem) => {
+        console.log(newItem);
         setClothingItems([newItem, ...clothingItems]);
         handleCloseModal();
       })
       .catch((err) => console.log(err));
   };
 
-  const handleDeleteItem = (card) => {
+  const handleDeleteItem = () => {
+    console.log(selectedCard, selectedCard._id);
     api
-      .removeItem(card.id)
+      .removeItem(selectedCard._id)
       .then(() => {
-        setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
+        api.getItemList();
+      })
+      .then((newList) => {
+        setClothingItems(newList);
       })
       .catch((err) => console.log(err));
   };
@@ -135,7 +140,12 @@ function App() {
               clothingItems={clothingItems}
             />
           </Route>
-          <Route path="/profile">Profile</Route>
+          <Route path="/profile">
+            <Profile
+              clothingItems={clothingItems}
+              handleSelectedCard={handleSelectedCard}
+            />
+          </Route>
         </Switch>
 
         <Footer />

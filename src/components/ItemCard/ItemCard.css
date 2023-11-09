@@ -24,8 +24,8 @@
 }
 
 .card__image {
-  width: 328px;
-  height: 328px;
+  width: 325px;
+  height: 325px;
   border-radius: 10px;
   cursor: pointer;
 }

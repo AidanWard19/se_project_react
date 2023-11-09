@@ -16,7 +16,7 @@ function Main({
   const { currentTemperatureUnit, handleUnitToggle } = React.useContext(
     CurrentTempUnitContext
   );
-  console.log(clothingItems);
+  console.log(handleUnitToggle);
   const weatherTemp = weatherTempsObj?.[currentTemperatureUnit] || 0;
 
   const getWeatherType = () => {
@@ -61,9 +61,8 @@ function Main({
   const weatherType = getWeatherType();
   const isDay = getIsDay();
   const weatherCondition = getWeatherCondition();
-  console.log(weatherCondition);
+  console.log(clothingItems);
   const filteredCards = clothingItems.filter((item) => {
-    console.log(item.weather);
     return item.weather === weatherType;
   });
 
