@@ -2,7 +2,7 @@ import React from "react";
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, isLoading }) => {
+const AddItemModal = ({ handleCloseModal, handleAddItem, isLoading }) => {
   const [name, setName] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
   const [weather, setWeather] = React.useState("");
@@ -15,15 +15,13 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, isLoading }) => {
     setImageUrl(event.target.value);
     console.log(event.target.value);
   };
-
   const handleWeatherChange = (event) => {
     console.log(`pressed ${event.target.value}`);
     setWeather(event.target.value);
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+    handleAddItem({ name, imageUrl, weather });
   };
 
   return (
@@ -31,7 +29,6 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, isLoading }) => {
       buttonText={isLoading ? "Saving..." : "Add garment"}
       title="New garment"
       onClose={handleCloseModal}
-      isOpen={isOpen}
       onSubmit={handleSubmit}
     >
       <label className="modal__label">

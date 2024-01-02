@@ -5,8 +5,13 @@ import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
-const Header = ({ place, onCreateModal }) => {
-  console.log(onCreateModal);
+const Header = ({
+  place,
+  onCreateModal,
+  isLoggedIn,
+  onLoginModal,
+  onRegisterModal,
+}) => {
   return (
     <header className="header">
       <div className="header__logo">
@@ -21,18 +26,40 @@ const Header = ({ place, onCreateModal }) => {
 
       <div className="header__avatar-logo">
         <ToggleSwitch />
-        <button className="header__button" type="text" onClick={onCreateModal}>
-          + Add Clothes
-        </button>
-        <Link to="/profile" className="header__name">
-          Terrence Tegegne
-        </Link>
-        <div className="header__avatar">
-          <img src={avatar} alt="avatar" />
-        </div>
+
+        {isLoggedIn ? (
+          <>
+            <button
+              className="header__button"
+              type="text"
+              onClick={onCreateModal}
+            >
+              + Add Clothes
+            </button>
+            <div className="header__avatar">
+              <img src={avatar} alt="avatar" />
+            </div>
+            <Link to="/profile" className="header__name">
+              Terrence Tegegne
+            </Link>
+          </>
+        ) : (
+          <>
+            <div className="header__register" onClick={onRegisterModal}>
+              Register
+            </div>
+            <div className="header__login" onClick={onLoginModal}>
+              Log In
+            </div>
+          </>
+        )}
       </div>
     </header>
   );
 };
 
 export default Header;
+
+{
+  /*  */
+}

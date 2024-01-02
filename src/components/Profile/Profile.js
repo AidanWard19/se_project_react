@@ -6,8 +6,12 @@ const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
   return (
     <div className="profile">
       <div className="profile__header">
-        <img className="profile__avatar" src={avatar} alt="avatar" />
-        <div className="profile__name">Terrence Tegegne</div>
+        <div className="profile__avatar-and-name">
+          <img className="profile__avatar" src={avatar} alt="avatar" />
+          <div className="profile__name">Terrence Tegegne</div>
+        </div>
+        <div className="profile__change-data">Change Profile Data</div>
+        <div className="profile__logout">Log Out</div>
       </div>
       <div className="profile__clothes-section">
         <div className="profile__clothes-header">

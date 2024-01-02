@@ -13,10 +13,9 @@ function Main({
   onSelectCard,
   clothingItems,
 }) {
-  const { currentTemperatureUnit, handleUnitToggle } = React.useContext(
+  const { currentTemperatureUnit } = React.useContext(
     CurrentTemperatureUnitContext
   );
-  console.log(handleUnitToggle);
   const weatherTemp = weatherTempsObj?.[currentTemperatureUnit] || 0;
 
   const getWeatherType = () => {
@@ -32,7 +31,6 @@ function Main({
   const getIsDay = () => {
     const sunriseUnix = sunrise * 1000;
     const sunsetUnix = sunset * 1000;
-    // console.log(sunriseUnix, sunsetUnix, currentTime);
     if (sunsetUnix >= currentTime && currentTime >= sunriseUnix) {
       return true;
     } else if (sunsetUnix <= currentTime && currentTime <= sunriseUnix) {
@@ -43,8 +41,6 @@ function Main({
   };
 
   const getWeatherCondition = () => {
-    console.log(weatherId);
-
     if (200 <= weatherId && weatherId <= 232) {
       return "storm";
     } else if (300 <= weatherId && weatherId <= 531) {
@@ -61,7 +57,6 @@ function Main({
   const weatherType = getWeatherType();
   const isDay = getIsDay();
   const weatherCondition = getWeatherCondition();
-  console.log(clothingItems);
   const filteredCards = clothingItems.filter((item) => {
     return item.weather === weatherType;
   });
