@@ -1,6 +1,6 @@
-const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "http://localhost:3001";
 
-const handleServerResponse = (res) => {
+export const handleServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 
@@ -17,6 +17,7 @@ const addItem = ({ name, imageUrl, weather }) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
     body: JSON.stringify({
       name,
@@ -31,6 +32,7 @@ const removeItem = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   }).then(handleServerResponse);
 };

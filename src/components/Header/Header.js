@@ -1,9 +1,10 @@
 import "./Header.css";
 import { currentDate } from "../../utils/constants";
 import logo from "../../images/logo.svg";
-import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import React from "react";
 
 const Header = ({
   place,
@@ -11,7 +12,10 @@ const Header = ({
   isLoggedIn,
   onLoginModal,
   onRegisterModal,
+  firstLetter,
 }) => {
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -36,11 +40,20 @@ const Header = ({
             >
               + Add Clothes
             </button>
-            <div className="header__avatar">
-              <img src={avatar} alt="avatar" />
-            </div>
+            {currentUser.avatar ? (
+              <div className="header__avatar-container">
+                <img
+                  className="header__avatar"
+                  src={currentUser.avatar}
+                  alt="avatar"
+                />
+              </div>
+            ) : (
+              <div className="header__avatar-placeholder">{firstLetter}</div>
+            )}
+
             <Link to="/profile" className="header__name">
-              Terrence Tegegne
+              {`${currentUser.name}`}
             </Link>
           </>
         ) : (
