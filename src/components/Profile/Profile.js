@@ -1,14 +1,22 @@
 import "./Profile.css";
 import ItemCard from "../ItemCard/ItemCard";
 import avatar from "../../images/avatar.svg";
+import React from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <div className="profile">
       <div className="profile__header">
         <div className="profile__avatar-and-name">
-          <img className="profile__avatar" src={avatar} alt="avatar" />
-          <div className="profile__name">Terrence Tegegne</div>
+          <img
+            className="profile__avatar"
+            src={currentUser.avatar}
+            alt="avatar"
+          />
+          <div className="profile__name">{currentUser.name}</div>
         </div>
         <div className="profile__change-data">Change Profile Data</div>
         <div className="profile__logout">Log Out</div>

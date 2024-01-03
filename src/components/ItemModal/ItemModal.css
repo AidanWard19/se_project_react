@@ -74,3 +74,11 @@
   align-self: start;
   cursor: pointer;
 }
+
+.item-modal__delete-button_hidden {
+  display: flex;
+}
+
+.item-modal__delete-button_hidden {
+  display: none;
+}

@@ -245,7 +245,7 @@ function App() {
           {activeModal === "create" && (
             <AddItemModal
               handleCloseModal={handleCloseModal}
-              onAddItem={handleAddItem}
+              handleAddItem={handleAddItem}
               isLoading={isLoading}
             />
           )}
