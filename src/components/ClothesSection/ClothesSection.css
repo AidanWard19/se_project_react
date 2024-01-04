@@ -1,7 +1,7 @@
 .clothes-section {
   display: flex;
   flex-direction: column;
-  min-width: 70;
+  min-width: 70%;
 }
 
 .clothes-section__header {
