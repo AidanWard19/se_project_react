@@ -136,7 +136,7 @@ function App() {
     return register(data)
       .then(() => {
         handleLogin(data);
-        history.push("/profile");
+        history.push("/");
         handleCloseModal();
       })
       .catch((err) => console.log(err))
@@ -246,7 +246,7 @@ function App() {
           }
         })
         .then(() => {
-          history.push("/profile");
+          history.push("/");
         })
         .catch((err) => console.log(err));
     }

@@ -23,6 +23,7 @@ const ItemCard = ({ item, onSelectCard, onCardLike }) => {
   const handleLikeClick = (event) => {
     event.preventDefault();
     console.log(item);
+    setIsLiked(!isLiked);
     onCardLike({ id: item._id, isLiked });
   };
 
@@ -36,8 +37,10 @@ const ItemCard = ({ item, onSelectCard, onCardLike }) => {
           onClick={() => onSelectCard(item)}
         />
       </div>
-      <div className="card__name">
-        <p className="card__name-text">{item.name}</p>
+      <div className="card__header">
+        <div className="card__name">
+          <p className="card__name-text">{item.name}</p>
+        </div>
         <div className="card__like-button-container">
           {currentUser.name && (
             <button

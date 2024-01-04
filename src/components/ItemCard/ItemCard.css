@@ -3,8 +3,16 @@
   justify-content: center;
 }
 
-.card__name {
+.card__header {
   position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card__name {
   text-align: center;
   padding: 5px;
   background-color: white;
@@ -31,14 +39,15 @@
 }
 
 .card__like-button {
-  position: absolute;
-  left: 42px;
-  bottom: 6px;
   border: none;
   width: 20px;
   height: 18px;
   background-position: center;
-  background-color: white;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  display: flex;
+  position: relative;
+  top: 8px;
 }
 
 .card__like-button:hover {
