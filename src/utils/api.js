@@ -38,7 +38,7 @@ const removeItem = (id) => {
 };
 
 const addCardLike = (id) => {
-  return fetch(`${BASE_URL}/items${id}/likes`, {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,

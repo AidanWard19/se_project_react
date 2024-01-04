@@ -17,6 +17,7 @@ import { login, register, checkToken } from "../../utils/auth";
 import Profile from "../Profile/Profile";
 import { defaultClothingItems } from "../../utils/constants";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 //
 //
@@ -56,6 +57,11 @@ function App() {
   const handleRegisterModal = () => {
     setActiveModal("register");
   };
+
+  const handleEditProfileModal = () => {
+    setActiveModal("edit");
+  };
+
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -139,20 +145,21 @@ function App() {
   };
 
   const handleCardLike = ({ id, isLiked }) => {
+    console.log(isLiked);
     isLiked
       ? api
-          .addCardLike(id)
+          .removeCardLike(id)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((c) => (c._id === id ? updatedCard : c))
+              cards.map((c) => (c.owner === id ? updatedCard : c))
             );
           })
           .catch((err) => console.log(err))
       : api
-          .removeCardLike(id)
+          .addCardLike(id)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((c) => (c._id === id ? updatedCard : c))
+              cards.map((c) => (c.owner === id ? updatedCard : c))
             );
           })
           .catch((err) => console.log(err));
@@ -257,6 +264,8 @@ function App() {
                 clothingItems={clothingItems}
                 handleSelectedCard={handleSelectedCard}
                 handleAddNew={handleCreateModal}
+                handleEditProfileModal={handleEditProfileModal}
+                onCardLike={handleCardLike}
               />
             </ProtectedRoute>
           </Switch>
@@ -299,6 +308,7 @@ function App() {
               onOrLogIn={handleLoginModal}
             />
           )}
+          {activeModal === "edit" && <EditProfileModal />}
         </CurrentTemperatureUnitContext.Provider>
       </div>
     </CurrentUserContext.Provider>

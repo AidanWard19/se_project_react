@@ -3,14 +3,19 @@ import ItemCard from "../ItemCard/ItemCard";
 import React from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
+const Profile = ({
+  clothingItems,
+  handleSelectedCard,
+  handleAddNew,
+  handleEditProfileModal,
+  onCardLike,
+}) => {
+  console.log(clothingItems);
   const currentUser = React.useContext(CurrentUserContext);
 
-  const usersItems = clothingItems.map((item) => {
-    if (item.owner === currentUser._id) {
-      return item;
-    }
-  });
+  const usersItems = clothingItems.filter(
+    (item) => item.owner === currentUser._id
+  );
 
   return (
     <div className="profile">
@@ -23,7 +28,9 @@ const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
           />
           <div className="profile__name">{currentUser.name}</div>
         </div>
-        <div className="profile__change-data">Change Profile Data</div>
+        <div className="profile__change-data" onClick={handleEditProfileModal}>
+          Change Profile Data
+        </div>
         <div className="profile__logout">Log Out</div>
       </div>
       <div className="profile__clothes-section">
@@ -40,6 +47,7 @@ const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
               key={item._id}
               item={item}
               onSelectCard={handleSelectedCard}
+              onCardLike={onCardLike}
             />
           ))}
         </div>

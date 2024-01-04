@@ -4,8 +4,13 @@ import React from "react";
 
 const ItemCard = ({ item, onSelectCard, onCardLike }) => {
   const currentUser = React.useContext(CurrentUserContext);
-  console.log(currentUser);
-  const isLiked = item.likes.some((id) => id === currentUser._id);
+  // const isLiked = item.likes.some((id) => id === currentUser._id);
+
+  const [isLiked, setIsLiked] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsLiked(item.likes.some((id) => id === currentUser._id));
+  }, []);
 
   const likeButtonClassName = `card__like-button ${
     isLiked ? "card__like-button_active" : "card__like-button_inactive"
@@ -13,8 +18,8 @@ const ItemCard = ({ item, onSelectCard, onCardLike }) => {
 
   const handleLikeClick = (event) => {
     event.preventDefault();
-    console.log("testing");
-    onCardLike({ id: item.owner, isLiked });
+    console.log(item);
+    onCardLike({ id: item._id, isLiked });
   };
 
   return (
