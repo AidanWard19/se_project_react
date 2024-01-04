@@ -45,7 +45,7 @@
 .profile__clothes-section {
   display: flex;
   flex-direction: column;
-  min-width: 70%;
+  min-width: 70;
 }
 
 .profile__clothes-header {

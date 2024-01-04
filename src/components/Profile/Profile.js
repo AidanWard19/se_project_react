@@ -1,11 +1,16 @@
 import "./Profile.css";
 import ItemCard from "../ItemCard/ItemCard";
-import avatar from "../../images/avatar.svg";
 import React from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
   const currentUser = React.useContext(CurrentUserContext);
+
+  const usersItems = clothingItems.map((item) => {
+    if (item.owner === currentUser._id) {
+      return item;
+    }
+  });
 
   return (
     <div className="profile">
@@ -30,7 +35,7 @@ const Profile = ({ clothingItems, handleSelectedCard, handleAddNew }) => {
         </div>
 
         <div className="profile__clothes-gallery">
-          {clothingItems.map((item) => (
+          {usersItems.map((item) => (
             <ItemCard
               key={item._id}
               item={item}

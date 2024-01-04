@@ -32,8 +32,7 @@ function App() {
   const [weatherId, setWeatherId] = React.useState(400);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] =
     React.useState("F");
-  const [clothingItems, setClothingItems] =
-    React.useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
@@ -139,6 +138,26 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    isLiked
+      ? api
+          .addCardLike(id)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === id ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err))
+      : api
+          .removeCardLike(id)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === id ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   // useEffects
   //
   React.useEffect(() => {
@@ -230,6 +249,7 @@ function App() {
                 weatherTempsObj={tempsObject}
                 onSelectCard={handleSelectedCard}
                 clothingItems={clothingItems}
+                onCardLike={handleCardLike}
               />
             </Route>
             <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile">

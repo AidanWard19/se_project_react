@@ -37,11 +37,31 @@ const removeItem = (id) => {
   }).then(handleServerResponse);
 };
 
+const addCardLike = (id) => {
+  return fetch(`${BASE_URL}/items${id}/likes`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  }).then(handleServerResponse);
+};
+
+const removeCardLike = (id) => {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  }).then(handleServerResponse);
+};
+
 const api = {
   getItemList,
   addItem,
   removeItem,
   handleServerResponse,
+  addCardLike,
+  removeCardLike,
 };
 
 export default api;
