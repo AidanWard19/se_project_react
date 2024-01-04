@@ -15,10 +15,6 @@ const ItemModal = ({ selectedCard, onClose, openModal }) => {
       : "item-modal__delete-button_hidden"
   }`;
 
-  const itemLikeButtonClassName = `item-modal__like-button ${
-    isOwn ? "item-modal__like-button_visible" : "item-modal__like-button_hidden"
-  }`;
-
   return (
     <div className={"modal item-modal"}>
       <div className="item-modal__content">

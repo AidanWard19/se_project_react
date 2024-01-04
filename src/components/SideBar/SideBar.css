@@ -1,0 +1,49 @@
+.sidebar__header {
+  display: flex;
+  margin: 0 40px 0;
+  flex-direction: column;
+  position: relative;
+}
+
+.sidebar__avatar-and-name {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.sidebar__avatar {
+  align-self: start;
+  width: 56px;
+  height: 56px;
+}
+
+/* .sidebar__sidebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-left: 40px;
+    max-width: 229px;
+    gap: 20px;
+  } */
+
+.sidebar__name {
+  width: 160px;
+  margin: 16px 0 16px 16px;
+}
+
+.sidebar__logout {
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.sidebar__logout:hover {
+  opacity: 0.6;
+}
+
+.sidebar__change-data {
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.sidebar__change-data:hover {
+  opacity: 0.6;
+}
