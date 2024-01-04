@@ -15,7 +15,6 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import api from "../../utils/api";
 import { login, register, checkToken } from "../../utils/auth";
 import Profile from "../Profile/Profile";
-import { defaultClothingItems } from "../../utils/constants";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
@@ -58,7 +57,7 @@ function App() {
     setActiveModal("register");
   };
 
-  const handleEditProfileModal = () => {
+  const handleEditModal = () => {
     setActiveModal("edit");
   };
 
@@ -172,12 +171,13 @@ function App() {
     history.push("/");
   };
 
-  const handleEditProfileSubmit = (data) => {
+  const handleEditProfileSubmit = ({ name, avatar }) => {
     setIsLoading(true);
     return api
-      .editProfile(data)
+      .editProfile({ name, avatar })
       .then((updated) => {
-        setCurrentUser(updated.data);
+        console.log(updated.user);
+        setCurrentUser(updated.user);
         handleCloseModal();
       })
       .catch((err) => console.log(err))
@@ -283,7 +283,7 @@ function App() {
                 clothingItems={clothingItems}
                 handleSelectedCard={handleSelectedCard}
                 handleAddNew={handleCreateModal}
-                handleEditProfileModal={handleEditProfileModal}
+                handleEditProfileModal={handleEditModal}
                 onCardLike={handleCardLike}
                 handleLogOut={handleLogOut}
               />
@@ -329,7 +329,11 @@ function App() {
             />
           )}
           {activeModal === "edit" && (
-            <EditProfileModal onSubmit={handleEditProfileSubmit} />
+            <EditProfileModal
+              onClose={handleCloseModal}
+              isLoading={isLoading}
+              onSubmit={handleEditProfileSubmit}
+            />
           )}
         </CurrentTemperatureUnitContext.Provider>
       </div>

@@ -4,7 +4,11 @@ import React from "react";
 
 const ItemCard = ({ item, onSelectCard, onCardLike }) => {
   const currentUser = React.useContext(CurrentUserContext);
-  console.log(currentUser);
+  if (currentUser.name) {
+    console.log(true);
+  } else {
+    console.log(false);
+  }
 
   const [isLiked, setIsLiked] = React.useState(false);
 
@@ -34,15 +38,14 @@ const ItemCard = ({ item, onSelectCard, onCardLike }) => {
       </div>
       <div className="card__name">
         <p className="card__name-text">{item.name}</p>
-
-        {currentUser && (
-          <div className="card__like-button-container">
+        <div className="card__like-button-container">
+          {currentUser.name && (
             <button
               className={`card__like-button ${likeButtonClassName}`}
               onClick={handleLikeClick}
             ></button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

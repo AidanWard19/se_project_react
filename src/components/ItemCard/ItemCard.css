@@ -38,7 +38,7 @@
   width: 20px;
   height: 18px;
   background-position: center;
-  background-color: transparent;
+  background-color: white;
 }
 
 .card__like-button:hover {

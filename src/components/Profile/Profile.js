@@ -11,7 +11,6 @@ const Profile = ({
   onCardLike,
   handleLogOut,
 }) => {
-  console.log(clothingItems);
   const currentUser = React.useContext(CurrentUserContext);
 
   const usersItems = clothingItems.filter(

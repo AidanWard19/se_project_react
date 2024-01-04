@@ -57,11 +57,12 @@ const removeCardLike = (id) => {
 
 const editProfile = ({ name, avatar }) => {
   return fetch(`${BASE_URL}/users/me`, {
-    method: "GET",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
+    body: JSON.stringify({ name, avatar }),
   }).then(handleServerResponse);
 };
 
@@ -72,6 +73,7 @@ const api = {
   handleServerResponse,
   addCardLike,
   removeCardLike,
+  editProfile,
 };
 
 export default api;
