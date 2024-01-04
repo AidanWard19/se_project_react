@@ -9,6 +9,7 @@ const Profile = ({
   handleAddNew,
   handleEditProfileModal,
   onCardLike,
+  handleLogOut,
 }) => {
   console.log(clothingItems);
   const currentUser = React.useContext(CurrentUserContext);
@@ -31,7 +32,9 @@ const Profile = ({
         <div className="profile__change-data" onClick={handleEditProfileModal}>
           Change Profile Data
         </div>
-        <div className="profile__logout">Log Out</div>
+        <div className="profile__logout" onClick={handleLogOut}>
+          Log Out
+        </div>
       </div>
       <div className="profile__clothes-section">
         <div className="profile__clothes-header">

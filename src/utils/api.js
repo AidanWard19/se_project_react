@@ -55,6 +55,16 @@ const removeCardLike = (id) => {
   }).then(handleServerResponse);
 };
 
+const editProfile = ({ name, avatar }) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  }).then(handleServerResponse);
+};
+
 const api = {
   getItemList,
   addItem,

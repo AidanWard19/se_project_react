@@ -165,6 +165,25 @@ function App() {
           .catch((err) => console.log(err));
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    history.push("/");
+  };
+
+  const handleEditProfileSubmit = (data) => {
+    setIsLoading(true);
+    return api
+      .editProfile(data)
+      .then((updated) => {
+        setCurrentUser(updated.data);
+        handleCloseModal();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  };
+
   // useEffects
   //
   React.useEffect(() => {
@@ -266,6 +285,7 @@ function App() {
                 handleAddNew={handleCreateModal}
                 handleEditProfileModal={handleEditProfileModal}
                 onCardLike={handleCardLike}
+                handleLogOut={handleLogOut}
               />
             </ProtectedRoute>
           </Switch>
@@ -308,7 +328,9 @@ function App() {
               onOrLogIn={handleLoginModal}
             />
           )}
-          {activeModal === "edit" && <EditProfileModal />}
+          {activeModal === "edit" && (
+            <EditProfileModal onSubmit={handleEditProfileSubmit} />
+          )}
         </CurrentTemperatureUnitContext.Provider>
       </div>
     </CurrentUserContext.Provider>
