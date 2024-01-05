@@ -3,7 +3,7 @@ import "./ToggleSwitch.css";
 import CurrentTempUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 const ToggleSwitch = () => {
-  const { currentTemperatureUnit, handleUnitToggle } = React.useContext(
+  const { currentTemperatureUnit, handleToggleSwitchChange } = React.useContext(
     CurrentTempUnitContext
   );
 
@@ -12,7 +12,7 @@ const ToggleSwitch = () => {
       <input
         type="checkbox"
         className="switch__checkbox"
-        onChange={handleUnitToggle}
+        onChange={handleToggleSwitchChange}
       />
       <span
         className={

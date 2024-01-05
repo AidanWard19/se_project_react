@@ -78,16 +78,13 @@ function App() {
     api
       .addItem(item)
       .then((newItem) => {
-        console.log(newItem);
         setClothingItems([newItem, ...clothingItems]);
       })
       .then(() => {
         handleCloseModal();
       })
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   };
   const handleDeleteItem = () => {
     setIsLoading(true);
@@ -213,7 +210,7 @@ function App() {
         setClothingItems(items);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [clothingItems]);
 
   React.useEffect(() => {
     getApiWeatherData()
