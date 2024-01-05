@@ -78,7 +78,7 @@ function App() {
     api
       .addItem(item)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems([...clothingItems, newItem.data]);
       })
       .then(() => {
         handleCloseModal();
@@ -210,7 +210,7 @@ function App() {
         setClothingItems(items);
       })
       .catch((err) => console.log(err));
-  }, [clothingItems]);
+  }, []);
 
   React.useEffect(() => {
     getApiWeatherData()
