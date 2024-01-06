@@ -43,6 +43,7 @@ const RegisterModal = ({ onClose, isLoading, onSubmit, onOrLogIn }) => {
           className="modal__input"
           type="email"
           name="email"
+          value={email}
           minLength="1"
           maxLength="30"
           placeholder="Email"
@@ -55,6 +56,7 @@ const RegisterModal = ({ onClose, isLoading, onSubmit, onOrLogIn }) => {
           className="modal__input"
           type="password"
           name="password"
+          value={password}
           minLength="1"
           maxLength="300"
           placeholder="Password"
@@ -67,6 +69,7 @@ const RegisterModal = ({ onClose, isLoading, onSubmit, onOrLogIn }) => {
           className="modal__input"
           type="text"
           name="name"
+          value={name}
           minLength="1"
           maxLength="300"
           placeholder="Name"
@@ -79,13 +82,14 @@ const RegisterModal = ({ onClose, isLoading, onSubmit, onOrLogIn }) => {
           className="modal__input"
           type="url"
           name="avatar"
+          value={avatar}
           minLength="1"
           maxLength="300"
           placeholder="Avatar URL"
           onChange={handleAvatarChange}
         />
       </label>
-      <button className="modal__or-button" type="submit" onClick={onOrLogIn}>
+      <button className="modal__or-button" type="button" onClick={onOrLogIn}>
         or Log in
       </button>
     </ModalWithForm>

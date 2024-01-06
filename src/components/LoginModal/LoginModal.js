@@ -44,7 +44,7 @@ const LoginModal = ({ onClose, isLoading, onSubmit, onOrRegister }) => {
         Password
         <input
           className="modal__input"
-          type="text"
+          type="password"
           name="password"
           minLength="1"
           maxLength="300"
@@ -55,7 +55,7 @@ const LoginModal = ({ onClose, isLoading, onSubmit, onOrRegister }) => {
       </label>
       <button
         className="modal__or-register-button"
-        type="submit"
+        type="button"
         onClick={onOrRegister}
       >
         or Register

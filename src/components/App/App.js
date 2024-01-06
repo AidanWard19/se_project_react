@@ -78,7 +78,7 @@ function App() {
     api
       .addItem(item)
       .then((newItem) => {
-        setClothingItems([...clothingItems, newItem.data]);
+        setClothingItems([newItem.data, ...clothingItems]);
       })
       .then(() => {
         handleCloseModal();
@@ -98,10 +98,8 @@ function App() {
       .then(() => {
         handleCloseModal();
       })
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   };
 
   const handleLogin = ({ email, password }) => {
@@ -140,11 +138,10 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  const handleCardLike = ({ id, isLiked }) => {
-    console.log(isLiked);
+  const handleCardLike = ({ id, isLiked, setIsLiked }) => {
     isLiked
       ? api
-          .removeCardLike(id)
+          .removeCardLike(id, isLiked, setIsLiked)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((c) => (c.owner === id ? updatedCard : c))
@@ -152,7 +149,7 @@ function App() {
           })
           .catch((err) => console.log(err))
       : api
-          .addCardLike(id)
+          .addCardLike(id, isLiked, setIsLiked)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((c) => (c.owner === id ? updatedCard : c))

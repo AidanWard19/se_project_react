@@ -37,22 +37,26 @@ const removeItem = (id) => {
   }).then(handleServerResponse);
 };
 
-const addCardLike = (id) => {
+const addCardLike = (id, isLiked, setIsLiked) => {
   return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
-  }).then(handleServerResponse);
+  })
+    .then(setIsLiked(!isLiked))
+    .then(handleServerResponse);
 };
 
-const removeCardLike = (id) => {
+const removeCardLike = (id, isLiked, setIsLiked) => {
   return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
-  }).then(handleServerResponse);
+  })
+    .then(setIsLiked(!isLiked))
+    .then(handleServerResponse);
 };
 
 const editProfile = ({ name, avatar }) => {
