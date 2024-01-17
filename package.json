@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* award8192000@whatweather.csproject.org:/home/award8192000/frontend"
   },
   "eslintConfig": {
     "extends": [
