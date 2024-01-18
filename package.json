@@ -2,7 +2,7 @@
   "name": "wtwr",
   "version": "0.1.0",
   "private": true,
-  "homepage": "www.whatweather.csproject.org",
+  "homepage": "https://www.whatweather.csproject.org",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
