@@ -1,6 +1,6 @@
 export const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "deployed-backend-url"
+    ? "https://api.whatweather.csproject.org"
     : "http://localhost:3001";
 
 export const handleServerResponse = (res) => {
