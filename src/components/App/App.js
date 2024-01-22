@@ -189,8 +189,8 @@ function App() {
   };
 
   const showPosition = (position) => {
-    setGeoLatitude(position.coords.latitude);
-    setGeoLongitude(position.coords.longitude);
+    setGeoLatitude(Math.floor(position.coords.latitude));
+    setGeoLongitude(Math.floor(position.coords.longitude));
   };
 
   // useEffects
