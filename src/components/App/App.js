@@ -17,6 +17,7 @@ import { login, register, checkToken } from "../../utils/auth";
 import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import { latitude, longitude } from "../../utils/constants";
 
 //
 //
@@ -37,6 +38,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [firstLetter, setFirstLetter] = React.useState("");
+  const [geoLatitude, setGeoLatitude] = React.useState(0);
+  const [geoLongitude, setGeoLongitude] = React.useState(0);
 
   const history = useHistory();
   // Handlers
@@ -178,8 +181,22 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      return navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      return;
+    }
+  };
+
+  const showPosition = (position) => {
+    setGeoLatitude(position.coords.latitude);
+    setGeoLongitude(position.coords.longitude);
+  };
+
   // useEffects
   //
+
   React.useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (e) => {
@@ -210,8 +227,10 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    getApiWeatherData()
+    getLocation();
+    getApiWeatherData(geoLatitude, geoLongitude)
       .then((data) => {
+        console.log(data);
         const location = data.name;
         const sys = data.sys;
         const tempsObj = parseWeatherData(data);
@@ -224,7 +243,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [geoLatitude, geoLongitude]);
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");

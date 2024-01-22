@@ -21,7 +21,7 @@
   line-height: 40px;
   font-weight: 700;
   font-family: "Cabinet Grotesk", sans-serif;
-  z-index: 1;
+  z-index: 0;
 }
 
 .weather__image {
@@ -30,5 +30,5 @@
   min-width: 100%;
   min-height: 80px;
   flex-shrink: 0;
-  z-index: 0;
+  z-index: -1;
 }
