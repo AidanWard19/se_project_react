@@ -12,5 +12,7 @@ The idea of the application is pretty simple - it makes a call to an API, which 
 
 As for some of the more complex aspects -- the user can make a secure account, with login data that gets encrypted upon registration. There is also security preventing other user's from accessing other users account, or manipulating the data associated with their accouing. Users can edit their profile, like other people's clothes, and delete their own clothes. The app also remembers if the user has not logged out, and will then automatically log them in upon revisiting the app.
 
+Lastly, the website is hosted using Google Cloud Platform (GCP).
+
 
 The project is built using React, React Router, Node.js, MongoDB, Express, GCP, and JWT Auth.
