@@ -17,7 +17,6 @@ import { login, register, checkToken } from "../../utils/auth";
 import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import { latitude, longitude } from "../../utils/constants";
 
 //
 //
@@ -38,8 +37,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [firstLetter, setFirstLetter] = React.useState("");
-  const [geoLatitude, setGeoLatitude] = React.useState(0);
-  const [geoLongitude, setGeoLongitude] = React.useState(0);
+  const [geoLatitude, setGeoLatitude] = React.useState(40);
+  const [geoLongitude, setGeoLongitude] = React.useState(-111);
 
   const history = useHistory();
   // Handlers
