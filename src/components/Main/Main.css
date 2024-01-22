@@ -5,7 +5,7 @@
 }
 
 .main__section {
-  margin: 20px auto 0 auto;
+  margin: 20px auto 0px auto;
   max-width: 1360px;
 }
 
@@ -24,4 +24,10 @@
   gap: 20px;
   justify-content: start;
   margin-top: 20px;
+}
+
+@media (max-width: 1055px) {
+  .main__items {
+    justify-content: center;
+  }
 }
