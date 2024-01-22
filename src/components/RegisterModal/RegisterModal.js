@@ -89,9 +89,14 @@ const RegisterModal = ({ onClose, isLoading, onSubmit, onOrLogIn }) => {
           onChange={handleAvatarChange}
         />
       </label>
-      <button className="modal__or-button" type="button" onClick={onOrLogIn}>
-        or Log in
-      </button>
+
+      {!isLoading ? (
+        <button className="modal__or-button" type="button" onClick={onOrLogIn}>
+          or Log in
+        </button>
+      ) : (
+        <></>
+      )}
     </ModalWithForm>
   );
 };

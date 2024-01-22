@@ -1,11 +1,13 @@
 .weather {
   position: relative;
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0px auto 0px;
   align-items: center;
-  max-height: 80px;
+  min-height: 80px;
   max-width: 1360px;
+  right: 0;
+  overflow-x: hidden;
+  border-radius: 12px;
 }
 
 .weather__temp {
@@ -19,9 +21,14 @@
   line-height: 40px;
   font-weight: 700;
   font-family: "Cabinet Grotesk", sans-serif;
+  z-index: 1;
 }
 
 .weather__image {
-  width: 100%;
-  height: 80px;
+  position: absolute;
+  right: 0;
+  min-width: 100%;
+  min-height: 80px;
+  flex-shrink: 0;
+  z-index: 0;
 }

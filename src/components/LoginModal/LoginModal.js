@@ -53,13 +53,17 @@ const LoginModal = ({ onClose, isLoading, onSubmit, onOrRegister }) => {
           onChange={handlePasswordChange}
         />
       </label>
-      <button
-        className="modal__or-register-button"
-        type="button"
-        onClick={onOrRegister}
-      >
-        or Register
-      </button>
+      {!isLoading ? (
+        <button
+          className="modal__or-register-button"
+          type="button"
+          onClick={onOrRegister}
+        >
+          or Register
+        </button>
+      ) : (
+        <></>
+      )}
     </ModalWithForm>
   );
 };
