@@ -1,4 +1,3 @@
-https://aidanward19.github.io/se_project_react/
 https://www.whatweather.csproject.org
 
 # Backend Repo Link
@@ -9,8 +8,8 @@ https://github.com/AidanWard19/se_project_express
 
 ## About the project
 
-The idea of the application is pretty simple - we make a call to an API, which then responds with the daily weather forecast. We collect the weather data, process it, and then based on the forecast, we recommend suitable clothing to the user.
+The idea of the application is pretty simple - it makes a call to an API, which then responds with the daily weather forecast. The weather data is collected, processed, and then based on the forecast, outfits suitable for the weather in the user's location are displayed.
 
-## Links
+As for some of the more complex aspects -- the user can make a secure account, with login data that gets encrypted upon registration. There is also security preventing other user's from accessing other users account, or manipulating the data associated with their accouing. Users can like other people's clothes, and delete their own clothes. The app also remembers if the user has not logged out, and will then automatically log them in upon revisiting the app.
 
-- [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
+The project is built using React, React Router, Node.js, MongoDB, Express, GCP, and JWT Auth.
