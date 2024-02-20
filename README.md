@@ -6,6 +6,8 @@ https://github.com/AidanWard19/se_project_express
 
 # WTWR (What to Wear?)
 
+![Capture 3](https://github.com/AidanWard19/se_project_react/assets/135480405/1e6f82e0-e62f-4d35-b1e0-359323240405)
+
 ## About the project
 
 The idea of the application is pretty simple - it makes a call to an API, which then responds with the daily weather forecast. The weather data is collected, processed, and then based on the forecast, outfits suitable for the weather in the user's location are displayed.
